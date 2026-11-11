@@ -1,0 +1,35 @@
+---
+title: "Forest Monitoring"
+format: html
+editor: visual
+---
+
+forest <- data.frame(
+  PlotID = paste0("P", 1:10),
+  CanopyCover = c(35, 42, 51, 58, 60, 67, 72, 80, 85, 91),
+  SpeciesRichness = c(12, 15, 18, 22, 25, 30, 34, 37, 40, 44)
+)
+
+p <- ggplot(
+  forest,
+  aes(
+    x = CanopyCover,
+    y = SpeciesRichness,
+    text = paste(
+      "Plot:", PlotID,
+      "<br>Canopy Cover:", CanopyCover, "%",
+      "<br>Species Richness:", SpeciesRichness
+    )
+  )
+) +
+  geom_point(size = 3, colour = "forestgreen") +
+  labs(
+    x = "Canopy Cover (%)",
+    y = "Species Richness",
+    title = "Biodiversity and Canopy Cover"
+  ) +
+  theme_minimal()
+
+ggplotly(p, tooltip = "text")
+
+---
